@@ -2,9 +2,9 @@ import argparse
 
 from pathlib import Path
 
-from app.file_manager import download_and_extract_zip
-from app.extractor import get_items_and_spare_parts_from_xml_file
-from app.utils import format_items, write_output_to_file
+from file_manager import download_and_extract_zip
+from extractor import get_items_and_spare_parts_from_xml_file
+from utils import format_items, write_output_to_file
 
 DIR_OUTPUT = Path('app/data/output')
 DIR_OUTPUT.mkdir(parents=True, exist_ok=True)

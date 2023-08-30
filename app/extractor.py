@@ -15,4 +15,6 @@ def get_items_and_spare_parts_from_xml_file(xml_path):
         for item in root.findall("./items/item"):
             spare_parts = [sp.attrib.get('name') for parts in item.findall(QUERY_SPARE_PARTS) for sp in parts]
             items.append({"name": item.attrib.get("name"), "spare_parts": spare_parts})
+    else:
+        print(f"File {xml_path} does not exist.")
     return items
