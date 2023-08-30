@@ -163,4 +163,4 @@ cython_debug/
 .vscode
 
 # Temporary data
-data
+app/data
