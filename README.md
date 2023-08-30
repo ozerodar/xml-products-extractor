@@ -6,6 +6,13 @@ Docker and Docker Compose should be installed on your system.
 
 ## Usage
 
+Clone the repository
+
+```bash
+git clone https://github.com/ozerodar/xml-products-extractor.git && cd xml-products-extractor
+```
+
+Build a docker image
 ```bash
 docker-compose build
 ```
