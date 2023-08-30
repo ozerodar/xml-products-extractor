@@ -2,7 +2,7 @@
 from typing import Dict, List
 from pathlib import Path
 
-DIR_OUTPUT = Path('app/data/output')
+DIR_OUTPUT = Path('data/output')
 DIR_OUTPUT.mkdir(parents=True, exist_ok=True)
 
 def format_items(items: List[Dict[str, str | List[str]]]) -> str:

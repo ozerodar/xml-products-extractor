@@ -3,8 +3,8 @@ from zipfile import ZipFile
 from pathlib import Path
 from urllib.parse import urlparse
 
-DIR_ZIP = Path("app/data/zip")
-DIR_XML = Path("app/data/xml")
+DIR_ZIP = Path("data/zip")
+DIR_XML = Path("data/xml")
 
 DIR_ZIP.mkdir(parents=True, exist_ok=True)
 DIR_XML.mkdir(parents=True, exist_ok=True)

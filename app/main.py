@@ -6,7 +6,7 @@ from file_manager import download_and_extract_zip
 from extractor import get_items_and_spare_parts_from_xml_file
 from utils import format_items, write_output_to_file
 
-DIR_OUTPUT = Path('app/data/output')
+DIR_OUTPUT = Path('data/output')
 DIR_OUTPUT.mkdir(parents=True, exist_ok=True)
 
 def main(url: str, verbose: bool = False):
