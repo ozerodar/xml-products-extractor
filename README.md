@@ -2,12 +2,12 @@
 This Python script extracts useful information from XML files of a specific format and outputs the names of items and their associated spare parts. The script is designed to work within a Docker environment and can be used to extract data from XML files provided in a zip archive.
 
 ## Demo
-The script is currently deployed on http://3.76.35.119:8000/
+The script is currently deployed on `https://zmgq4lsekrshofijzmco4tflpi0xlece.lambda-url.eu-central-1.on.aws`
 You can try open the following links:
-- `http://3.76.35.119:8000/docs` - the documentation
-- `http://3.76.35.119:8000/items/count` - the number of items in a sample zip file
-- `http://3.76.35.119:8000/items/names` - the names of items
-- `http://3.76.35.119:8000/items/parts` - the names of items and their spare parts
+- `https://zmgq4lsekrshofijzmco4tflpi0xlece.lambda-url.eu-central-1.on.aws/docs` - the documentation
+- `https://zmgq4lsekrshofijzmco4tflpi0xlece.lambda-url.eu-central-1.on.aws/items/count` - the number of items in a sample zip file
+- `https://zmgq4lsekrshofijzmco4tflpi0xlece.lambda-url.eu-central-1.on.aws/items/names` - the names of items
+- `https://zmgq4lsekrshofijzmco4tflpi0xlece.lambda-url.eu-central-1.on.aws/items/parts` - the names of items and their spare parts
 
 ## Requirements
 Docker and Docker Compose should be installed on your system.

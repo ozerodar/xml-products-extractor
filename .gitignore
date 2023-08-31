@@ -164,3 +164,4 @@ cython_debug/
 
 # Temporary data
 app/data
+deploy.sh

@@ -3,10 +3,13 @@ from functools import wraps
 from fastapi import FastAPI, HTTPException, status
 from fastapi.responses import HTMLResponse
 
+from mangum import Mangum
+
 from app.xmlextractor.extractor import get_items
 from app.exceptions import ZipDownloadFailed, ZipExtractionFailed
 
 app = FastAPI(title="XML items xmlextractor")
+handler = Mangum(app)
 
 DEFAULT_ZIP_URL = "https://www.retailys.cz/wp-content/uploads/astra_export_xml.zip"
 HTML_TEMPLATE_COUNT = f"""
@@ -54,7 +57,6 @@ HTML_TABLE_STYLE = """
                 }}
             </style>
             """
-
 HTML_TEMPLATE_PARTS = f"""
     <html>
         <head>
@@ -109,8 +111,9 @@ async def list_item_parts(url: str = DEFAULT_ZIP_URL) -> str:
     """API endpoint for listing item part names"""
     parts_rows = ""
     for item in get_items(url=url):
-        parts = "".join([HTML_TEMPLATE_PART.format(part=part) for part in item.spare_parts])
-        parts_list = HTML_TEMPLATE_PARTS_LIST.format(parts=parts) if parts else ""
-        parts_rows += HTML_TEMPLATE_PARTS_ROW.format(name=item.name, parts_list=parts_list)
+        if item.spare_parts:
+            parts = "".join([HTML_TEMPLATE_PART.format(part=part) for part in item.spare_parts])
+            parts_list = HTML_TEMPLATE_PARTS_LIST.format(parts=parts) if parts else ""
+            parts_rows += HTML_TEMPLATE_PARTS_ROW.format(name=item.name, parts_list=parts_list)
 
     return HTML_TEMPLATE_PARTS.format(parts_rows=parts_rows)
