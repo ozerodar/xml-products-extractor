@@ -1,8 +1,10 @@
 """This module contains the API for the XML items xmlextractor."""
-from fastapi import FastAPI
+from functools import wraps
+from fastapi import FastAPI, HTTPException, status
 from fastapi.responses import HTMLResponse
 
 from app.xmlextractor.extractor import get_items
+from app.exceptions import ZipDownloadFailed, ZipExtractionFailed
 
 app = FastAPI(title="XML items xmlextractor")
 
@@ -71,22 +73,39 @@ HTML_TEMPLATE_PARTS = f"""
     </html>
 """
 
+def error_handler_async(func):
+    """Decorator for handling errors in async functions"""
+    @wraps(func)
+    async def wrapper(*args, **kwargs):
+        try:
+            return await func(*args, **kwargs)
+
+        except (ZipDownloadFailed, ZipExtractionFailed) as e:
+            raise HTTPException(status.HTTP_400_BAD_REQUEST, str(e))
+
+    return wrapper
 
 
-@app.get("/items/count", response_class=HTMLResponse)
+
+@app.get("/items/count", response_class=HTMLResponse, response_model=str)
+@error_handler_async
 async def list_item_count(url: str = DEFAULT_ZIP_URL) -> str:
     """API endpoint for counting items"""
     return HTML_TEMPLATE_COUNT.format(items=len(get_items(url=url)))
 
 
-@app.get("/items/names", response_class=HTMLResponse)
+@app.get("/items/names", response_class=HTMLResponse, response_model=str)
+@error_handler_async
 async def list_item_names(url: str = DEFAULT_ZIP_URL) -> str:
+    """API endpoint for listing item names"""
     names = "<br>".join([item.name for item in get_items(url=url)])
     return HTML_TEMPLATE_NAMES.format(names=names)
 
 
-@app.get("/items/parts", response_class=HTMLResponse)
+@app.get("/items/parts", response_class=HTMLResponse, response_model=str)
+@error_handler_async
 async def list_item_parts(url: str = DEFAULT_ZIP_URL) -> str:
+    """API endpoint for listing item part names"""
     parts_rows = ""
     for item in get_items(url=url):
         parts = "".join([HTML_TEMPLATE_PART.format(part=part) for part in item.spare_parts])

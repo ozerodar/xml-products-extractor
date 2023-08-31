@@ -1,3 +1,4 @@
+"""This module is responsible for extracting the items and spare parts from the XML file."""
 import xml.etree.ElementTree as ET
 from pathlib import Path
 from typing import List
@@ -9,10 +10,8 @@ from app.xmlextractor.file_manager import download_and_extract_zip
 QUERY_SPARE_PARTS = "./parts/part/[@categoryId='1']."
 
 
-def get_items_and_spare_parts_from_xml_file(xml_path) -> List[mi.Item]:
-    """
-    This function gets the items and spare parts from the XML file.
-    """
+def get_items_and_spare_parts_from_xml_file(xml_path: str) -> List[mi.Item]:
+    """This function gets the items and spare parts from the XML file."""
     items = []
     if Path(xml_path).exists():
         tree = ET.parse(xml_path)
@@ -25,6 +24,7 @@ def get_items_and_spare_parts_from_xml_file(xml_path) -> List[mi.Item]:
 
 
 def get_items(url: str) -> List[mi.Item]:
+    """This function downloads zip, extracts it and returns the items from all xml files it can find"""
     path = download_and_extract_zip(url)
     items = []
     for file in list(Path(path).glob("*.xml")): # find all xml files in zip

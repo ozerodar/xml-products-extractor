@@ -1,10 +1,18 @@
 # XML Data Extraction Script
 This Python script extracts useful information from XML files of a specific format and outputs the names of items and their associated spare parts. The script is designed to work within a Docker environment and can be used to extract data from XML files provided in a zip archive.
 
+## Demo
+The script is currently deployed on http://3.76.35.119:8000/
+You can try open the following links:
+- `http://3.76.35.119:8000/docs` - the documentation
+- `http://3.76.35.119:8000/items/count` - the number of items in a sample zip file
+- `http://3.76.35.119:8000/items/names` - the names of items
+- `http://3.76.35.119:8000/items/parts` - the names of items and their spare parts
+
 ## Requirements
 Docker and Docker Compose should be installed on your system.
 
-## Usage
+## Setup
 
 Clone the repository
 
@@ -17,16 +25,20 @@ Build a docker image
 docker-compose build
 ```
 
-Run the script with the provided URL to the zip file containing XML data:
-
+Start the server
 ```bash
-docker-compose run --rm app sh -c "python main.py [URL] [-v|--verbose]"
+docker-compose up"
 ```
-Replace [URL] with the actual URL of the zip file you want to process. Use the -v or --verbose flag to enable verbose logging to the screen, for example:
+The Uvicorn server will run on: http://localhost:8000
 
-```bash
-docker-compose run --rm app sh -c "python main.py https://www.retailys.cz/wp-content/uploads/astra_export_xml.zip"
-```
+## Usage
+
+The script has three main functions:
+- count `/items/count`: outputs the number of items in a .xml file
+- names `/items/names`: outputs the names of items in a .xml file
+- parts `/items/parts`: outputs the names of items and their spare parts (if present)
+
+Each endpoint has an optional argument `url` that points to a zip file containing xml files. If `url` is not provided, a sample file will be processed.
 
 ## Tests
 You can run tests using the following command:
@@ -69,4 +81,4 @@ The script is designed to process XML files following a specific format. The XML
 The script extracts information from the `<item>` and `<part>` elements within the XML data.
 
 ## Output
-The script extracts names of items and their associated spare parts (if applicable) and either writes the output to a specified output file or logs it to the screen based on the provided command-line options.
+The script extracts names of items and their associated spare parts (if applicable) and returns them in a request. The script is supposed to run in a browser, so the output string is an html string. For more information, see the documentation at `http://localhost:8000`.
