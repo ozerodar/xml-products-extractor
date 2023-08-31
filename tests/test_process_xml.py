@@ -1,6 +1,7 @@
 from app.xmlextractor.extractor import get_items_and_spare_parts_from_xml_file
 from tests import DIR_TEST_FILE
 
+
 def test_extract_items_no_file():
     items = get_items_and_spare_parts_from_xml_file("file_not_found.xml")
     assert items == []

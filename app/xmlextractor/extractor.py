@@ -27,6 +27,6 @@ def get_items(url: str) -> List[mi.Item]:
     """This function downloads zip, extracts it and returns the items from all xml files it can find"""
     path = download_and_extract_zip(url)
     items = []
-    for file in list(Path(path).glob("*.xml")): # find all xml files in zip
+    for file in list(Path(path).glob("*.xml")):  # find all xml files in zip
         items.extend(get_items_and_spare_parts_from_xml_file(str(file)))
     return items

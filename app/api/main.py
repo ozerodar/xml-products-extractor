@@ -73,8 +73,10 @@ HTML_TEMPLATE_PARTS = f"""
     </html>
 """
 
+
 def error_handler_async(func):
     """Decorator for handling errors in async functions"""
+
     @wraps(func)
     async def wrapper(*args, **kwargs):
         try:
@@ -84,7 +86,6 @@ def error_handler_async(func):
             raise HTTPException(status.HTTP_400_BAD_REQUEST, str(e))
 
     return wrapper
-
 
 
 @app.get("/items/count", response_class=HTMLResponse, response_model=str)
