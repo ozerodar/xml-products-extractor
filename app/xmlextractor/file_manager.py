@@ -3,11 +3,7 @@ from zipfile import ZipFile
 from pathlib import Path
 from urllib.parse import urlparse
 
-DIR_ZIP = Path("data/zip")
-DIR_XML = Path("data/xml")
-
-DIR_ZIP.mkdir(parents=True, exist_ok=True)
-DIR_XML.mkdir(parents=True, exist_ok=True)
+from app import DIR_XML, DIR_ZIP
 
 
 def download_zip(url, path):
