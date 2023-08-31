@@ -27,7 +27,7 @@ docker-compose build
 
 Start the server
 ```bash
-docker-compose up"
+docker-compose up
 ```
 The Uvicorn server will run on: http://localhost:8000
 
