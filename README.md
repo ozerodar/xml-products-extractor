@@ -80,4 +80,4 @@ The script is designed to process XML files following a specific format. The XML
 The script extracts information from the `<item>` and `<part>` elements within the XML data.
 
 ## Output
-The script extracts names of items and their associated spare parts (if applicable) and returns them in a request. The script is supposed to run in a browser, so the output string is an html string. For more information, see the documentation at `http://localhost:8000`.
+The script extracts names of items and their associated spare parts (if applicable) and returns them in a request. The script is supposed to run in a browser, so the output string is an html string. For more information, see the documentation at `http://localhost:8000/docs`.
